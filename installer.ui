@@ -83,8 +83,8 @@
       <rect>
        <x>40</x>
        <y>30</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -216,8 +216,8 @@
       <rect>
        <x>40</x>
        <y>70</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -232,8 +232,8 @@
       <rect>
        <x>40</x>
        <y>110</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -248,8 +248,8 @@
       <rect>
        <x>40</x>
        <y>150</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -264,8 +264,8 @@
       <rect>
        <x>40</x>
        <y>190</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -280,8 +280,8 @@
       <rect>
        <x>40</x>
        <y>230</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -296,8 +296,8 @@
       <rect>
        <x>40</x>
        <y>270</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -312,8 +312,8 @@
       <rect>
        <x>40</x>
        <y>310</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -328,8 +328,8 @@
       <rect>
        <x>40</x>
        <y>350</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -357,8 +357,8 @@
       <rect>
        <x>50</x>
        <y>230</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -451,8 +451,8 @@
       <rect>
        <x>50</x>
        <y>110</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -467,8 +467,8 @@
       <rect>
        <x>50</x>
        <y>70</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -496,8 +496,8 @@
       <rect>
        <x>50</x>
        <y>270</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -525,8 +525,8 @@
       <rect>
        <x>50</x>
        <y>310</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -554,8 +554,8 @@
       <rect>
        <x>50</x>
        <y>150</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="frameShadow">
@@ -573,8 +573,8 @@
       <rect>
        <x>50</x>
        <y>190</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -589,8 +589,8 @@
       <rect>
        <x>50</x>
        <y>350</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -608,8 +608,8 @@
       <rect>
        <x>50</x>
        <y>30</y>
-       <width>21</width>
-       <height>20</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -656,8 +656,8 @@
       <rect>
        <x>20</x>
        <y>310</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -685,8 +685,8 @@
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -701,8 +701,8 @@
       <rect>
        <x>20</x>
        <y>350</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -717,8 +717,8 @@
       <rect>
        <x>20</x>
        <y>230</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -733,8 +733,8 @@
       <rect>
        <x>20</x>
        <y>190</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -749,8 +749,8 @@
       <rect>
        <x>20</x>
        <y>150</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -778,8 +778,8 @@
       <rect>
        <x>20</x>
        <y>70</y>
-       <width>21</width>
-       <height>16</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -846,8 +846,8 @@
       <rect>
        <x>20</x>
        <y>110</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -888,8 +888,8 @@
       <rect>
        <x>20</x>
        <y>270</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -904,8 +904,8 @@
       <rect>
        <x>290</x>
        <y>150</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -920,8 +920,8 @@
       <rect>
        <x>290</x>
        <y>190</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -936,8 +936,8 @@
       <rect>
        <x>290</x>
        <y>230</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -952,8 +952,8 @@
       <rect>
        <x>290</x>
        <y>270</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -968,8 +968,8 @@
       <rect>
        <x>290</x>
        <y>350</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -984,8 +984,8 @@
       <rect>
        <x>290</x>
        <y>110</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -1000,8 +1000,8 @@
       <rect>
        <x>290</x>
        <y>70</y>
-       <width>21</width>
-       <height>16</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -1016,8 +1016,8 @@
       <rect>
        <x>290</x>
        <y>310</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -1032,8 +1032,8 @@
       <rect>
        <x>290</x>
        <y>30</y>
-       <width>21</width>
-       <height>21</height>
+       <width>25</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
