@@ -91,7 +91,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>documents/images/vs.png</pixmap>
+      <pixmap>documents/images/vis.png</pixmap>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_12">
@@ -1043,6 +1043,19 @@
       <pixmap>documents/images/idk.png</pixmap>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label_37">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>450</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Path not set!</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
