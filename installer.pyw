@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 import webbrowser
 import requests
+import os.path
 
 class Ui_Installer(object):
     def setupUi(self, Installer):
@@ -13,23 +14,23 @@ class Ui_Installer(object):
         self.centralwidget = QtWidgets.QWidget(Installer)
         self.centralwidget.setObjectName("centralwidget")
         self.toolButton = QtWidgets.QToolButton(self.centralwidget)
-        self.toolButton.setGeometry(QtCore.QRect(660, 450, 121, 31))
+        self.toolButton.setGeometry(QtCore.QRect(680, 450, 121, 31))
         self.toolButton.setObjectName("toolButton")
         self.toolButton.clicked.connect(self.download)
         self.toolButton_2 = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_2.clicked.connect(self.author)
-        self.toolButton_2.setGeometry(QtCore.QRect(530, 450, 121, 31))
+        self.toolButton_2.setGeometry(QtCore.QRect(550, 450, 121, 31))
         self.toolButton_2.setObjectName("toolButton_2")
         self.toolButton_3 = QtWidgets.QToolButton(self.centralwidget)
-        self.toolButton_3.setGeometry(QtCore.QRect(10, 450, 121, 31))
+        self.toolButton_3.setGeometry(QtCore.QRect(20, 450, 121, 31))
         self.toolButton_3.clicked.connect(self.setPath)
         self.toolButton_3.setObjectName("toolButton_3")
         self.label_37 = QtWidgets.QLabel(self.centralwidget)
-        self.label_37.setGeometry(QtCore.QRect(280, 450, 141, 31))
+        self.label_37.setGeometry(QtCore.QRect(300, 450, 221, 31))
         self.label_37.setText("Path not set!")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.clicked.connect(self.dark_mode)
-        self.pushButton.setGeometry(QtCore.QRect(150, 450, 121, 30))
+        self.pushButton.setGeometry(QtCore.QRect(160, 450, 121, 30))
         self.pushButton.setObjectName("pushButton")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(270, 30, 261, 391))
@@ -360,7 +361,7 @@ class Ui_Installer(object):
         path = str(QtWidgets.QFileDialog.getExistingDirectory())
         if path != ('', ''):
             print("path correct")
-            self.label_37.setText("Path Selected")
+            self.label_37.setText(path)
         else:
             print("wrong path")
 
@@ -372,35 +373,35 @@ class Ui_Installer(object):
         x = msg.exec_()
 
 
-    def test(self):
-
-        if self.checkbox_23.isChecked():
-            url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open("7z.exe", "wb")
-            file.write(content)
-            file.close()
-
-
-
     def download(self):
 
         if self.checkBox.isChecked():
-            url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
+            url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("VisualStudio-Setup.exe", "wb")
+            file = open("SteamSetup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Steam"
+            if os.path.exists("SteamSetup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         if self.checkBox_2.isChecked():
-            url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
+            url_download = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
             download = requests.get(url_download)
             content = download.content
-            file = open("Vlc.exe", "wb")
+            file = open("DiscordSetup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Discord"
+            if os.path.exists("DiscordSetup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
             
         if self.checkBox_3.isChecked():
             url_download = "https://download-hr.utorrent.com/track/stable/endpoint/utorrent/os/windows"
@@ -409,6 +410,12 @@ class Ui_Installer(object):
             file = open("uTorrent.exe", "wb")
             file.write(content)
             file.close()
+            name = "uTorrent"
+            if os.path.exists("uTorrent.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         if self.checkBox_4.isChecked():
             url_download = f"https://launcher.mojang.com/download/MinecraftInstaller.exe"
@@ -417,6 +424,13 @@ class Ui_Installer(object):
             file = open("MinecraftLauncher.exe", "wb")
             file.write(content)
             file.close()
+            name = "Minecraft Launcher"
+            if os.path.exists("MinecraftLauncher.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
+
 
         if self.checkBox_5.isChecked():
             url_download = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
@@ -425,6 +439,12 @@ class Ui_Installer(object):
             file = open("EpicGamesLauncherInstaller.msi", "wb")
             file.write(content)
             file.close()
+            name = "Epic Games"
+            if os.path.exists("EpicGamesLauncherInstaller.msi"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         if self.checkBox_6.isChecked():
             url_download = "https://www.battle.net/download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live&id=548869183.1649688146"
@@ -433,6 +453,14 @@ class Ui_Installer(object):
             file = open("BattleNet.exe", "wb")
             file.write(content)
             file.close()
+            name = "BattleNet"
+            if os.path.exists("BattleNet.exe.msi"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
+
+
 
         if self.checkBox_7.isChecked():
             url_download = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
@@ -441,6 +469,12 @@ class Ui_Installer(object):
             file = open("logitech-installer.exe", "wb")
             file.write(content)
             file.close()
+            name = "Logitech GHub"
+            if os.path.exists("logitech-installer.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         if self.checkBox_8.isChecked():
             url_download = "https://www.dm.origin.com/download"
@@ -449,6 +483,12 @@ class Ui_Installer(object):
             file = open("OriginSetup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Origin"
+            if os.path.exists("OriginSetup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         if self.checkBox_9.isChecked():
             url_download = "https://tlauncher.org/installer"
@@ -457,6 +497,13 @@ class Ui_Installer(object):
             file = open("Tlauncher.exe", "wb")
             file.write(content)
             file.close()
+            name = "TLauncher"
+            if os.path.exists("Tlauncher.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
+
 
         elif self.checkBox_10.isChecked():
             url_download = "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-unified-windows-x86-4.3.0-1-online.exe"
@@ -465,6 +512,12 @@ class Ui_Installer(object):
             file = open("QTDesigner-Setup.exe", "wb")
             file.write(content)
             file.close()
+            name = "QT Designer"
+            if os.path.exists("QTDesigner-Setup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         elif self.checkBox_11.isChecked():
             url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
@@ -473,6 +526,13 @@ class Ui_Installer(object):
             file = open("VisualStudio-Setup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Visual Studio"
+            if os.path.exists("VisualStudio-Setup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
+
 
         elif self.checkBox_12.isChecked():
             url_download = "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.1/blender-3.1.2-windows-x64.msi"
@@ -481,6 +541,12 @@ class Ui_Installer(object):
             file = open("BlenderSetup.msi", "wb")
             file.write(content)
             file.close()
+            name = "Blender"
+            if os.path.exists("BlenderSetup.msi"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         elif self.checkBox_13.isChecked():
             url_download = "https://nodejs.org/dist/v16.14.2/node-v16.14.2-x64.msi"
@@ -489,6 +555,12 @@ class Ui_Installer(object):
             file = open("Node-Setup.msi", "wb")
             file.write(content)
             file.close()
+            name = "NodeJS"
+            if os.path.exists("Node-Setup.msi"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
 
         elif self.checkBox_14.isChecked():
@@ -498,6 +570,12 @@ class Ui_Installer(object):
             file = open("SublimeText-Build.exe", "wb")
             file.write(content)
             file.close()
+            name = "Sublime Text"
+            if os.path.exists("SublimeText-Build.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
 
         elif self.checkBox_15.isChecked():
@@ -507,7 +585,12 @@ class Ui_Installer(object):
             file = open("PyCharm-Community.exe", "wb")
             file.write(content)
             file.close()
-            xx = download.exec_()
+            name = "PyCharm"
+            if os.path.exists("PyCharm-Community.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
 
         elif self.checkBox_16.isChecked():
@@ -517,15 +600,27 @@ class Ui_Installer(object):
             file = open("VisualStudioCode-Setup.exe", "wb")
             file.write(content)
             file.close()
+            name = "VS Code"
+            if os.path.exists("VisualStudioCode-Setup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
 
         elif self.checkBox_17.isChecked():
-            url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
+            url_download = "https://ftp.acc.umu.se/mirror/eclipse.org/oomph/epp/2022-03/R/eclipse-inst-jre-win64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("SteamSetup.exe", "wb")
+            file = open("Eclipse-Installer.exe", "wb")
             file.write(content)
             file.close()
+            name = "Eclipse"
+            if os.path.exists("Eclipse-Installer.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         elif self.checkBox_18.isChecked():
             url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
@@ -534,6 +629,12 @@ class Ui_Installer(object):
             file = open("DevCPP.exe", "wb")
             file.write(content)
             file.close()
+            name = "dev.cpp"
+            if os.path.exists("DevCPP.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
 
         elif self.checkBox_19.isChecked():
@@ -546,6 +647,12 @@ class Ui_Installer(object):
             file = open("amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe", "wb")
             file.write(content)
             file.close()
+            name = "Amd Radeon Software"
+            if os.path.exists("amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         elif self.checkBox_21.isChecked():
             url_download = "https://it.download.nvidia.com/GFE/GFEClient/3.25.1.27/GeForce_Experience_v3.25.1.27.exe"
@@ -554,22 +661,41 @@ class Ui_Installer(object):
             file = open("GeForce_Experience.exe", "wb")
             file.write(content)
             file.close()
+            name = "Geforce Experience"
+            if os.path.exists("GeForce_Experience.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
 
         elif self.checkBox_22.isChecked():
             url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("Vlc.exe", "wb")
+            file = open("vlcsetup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Vlc"
+            if os.path.exists("vlcsetup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully installed!")
+                x = msg.exec_()
+
 
         elif self.checkBox_23.isChecked():
             url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("7z.exe", "wb")
+            file = open("7-zip.exe", "wb")
             file.write(content)
             file.close()
+            name = "7-zip"
+            if os.path.exists("7-zip.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully downloaded!")
+                x = msg.exec_()
 
         elif self.checkBox_24.isChecked():
             url_download = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.2.4-Full-Installer-x64.exe"
@@ -578,6 +704,12 @@ class Ui_Installer(object):
             file = open("OBS-Full-Installer.exe", "wb")
             file.write(content)
             file.close()
+            name = "OBS"
+            if os.path.exists("OBS-Full-Installer.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully downloaded!")
+                x = msg.exec_()
 
         elif self.checkBox_25.isChecked():
             url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
@@ -586,6 +718,12 @@ class Ui_Installer(object):
             file = open("WinRar-Setup.exe", "wb")
             file.write(content)
             file.close()
+            name = "WinRar"
+            if os.path.exists("WinRar-Setup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully downloaded!")
+                x = msg.exec_()
 
         elif self.checkBox_26.isChecked():
             url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
@@ -594,6 +732,12 @@ class Ui_Installer(object):
             file = open("Virtual-Box-Windows.exe", "wb")
             file.write(content)
             file.close()
+            name = "Virtual Box"
+            if os.path.exists("Virtual-Box-Windows.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully downloaded!")
+                x = msg.exec_()
 
         elif self.checkBox_27.isChecked():
             url_download = "https://download.scdn.co/SpotifySetup.exe"
@@ -602,6 +746,12 @@ class Ui_Installer(object):
             file = open("SpotifySetup.exe", "wb")
             file.write(content)
             file.close()
+            name = "Spotify"
+            if os.path.exists("SpotifySetup.exe"):
+                msg = QMessageBox()
+                msg.setWindowTitle("Done")
+                msg.setText(f"{name} installer successfully downloaded!")
+                x = msg.exec_()
 
 
 
