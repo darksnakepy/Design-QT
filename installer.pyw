@@ -370,28 +370,38 @@ class Ui_Installer(object):
         msg.setWindowTitle("Authors")
         msg.setText("Programmato da:\n- Giovanni Sansonetti (Code) \n- Gabriele Mancini (Design)")
         x = msg.exec_()
-        
-    def download(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Installing packages")
-        msg.setText("Currently installing selected packages")
-        
-        if self.checkBox.isChecked():
-            url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
+
+
+    def test(self):
+
+        if self.checkbox_23.isChecked():
+            url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("SteamSetup.exe", "wb")
+            file = open("7z.exe", "wb")
+            file.write(content)
+            file.close()
+
+
+
+    def download(self):
+
+        if self.checkBox.isChecked():
+            url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
+            download = requests.get(url_download)
+            content = download.content
+            file = open("VisualStudio-Setup.exe", "wb")
             file.write(content)
             file.close()
 
         if self.checkBox_2.isChecked():
-            url_download = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
+            url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("DiscordSetup.exe", "wb")
+            file = open("Vlc.exe", "wb")
             file.write(content)
             file.close()
-
+            
         if self.checkBox_3.isChecked():
             url_download = "https://download-hr.utorrent.com/track/stable/endpoint/utorrent/os/windows"
             download = requests.get(url_download)
@@ -448,7 +458,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkBox_10.isChecked():
+        elif self.checkBox_10.isChecked():
             url_download = "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-unified-windows-x86-4.3.0-1-online.exe"
             download = requests.get(url_download)
             content = download.content
@@ -456,7 +466,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_11.isChecked():
+        elif self.checkBox_11.isChecked():
             url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
             download = requests.get(url_download)
             content = download.content
@@ -464,7 +474,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_12.isChecked():
+        elif self.checkBox_12.isChecked():
             url_download = "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.1/blender-3.1.2-windows-x64.msi"
             download = requests.get(url_download)
             content = download.content
@@ -472,7 +482,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_13.isChecked():
+        elif self.checkBox_13.isChecked():
             url_download = "https://nodejs.org/dist/v16.14.2/node-v16.14.2-x64.msi"
             download = requests.get(url_download)
             content = download.content
@@ -480,7 +490,8 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_14.isChecked():
+
+        elif self.checkBox_14.isChecked():
             url_download = "https://download.sublimetext.com/sublime_text_build_4126_x64_setup.exe"
             download = requests.get(url_download)
             content = download.content
@@ -488,15 +499,18 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_15.isChecked():
+
+        elif self.checkBox_15.isChecked():
             url_download = "https://download.jetbrains.com/python/pycharm-community-2021.3.3.exe?_ga=2.185222057.1085385846.1649606918-1947123728.1649606918&_gl=1*ifgtn3*_ga*MTk0NzEyMzcyOC4xNjQ5NjA2OTE4*_ga_V0XZL7QHEB*MTY0OTY5MDcwOS4yLjEuMTY0OTY5MDcxMi4w"
             download = requests.get(url_download)
             content = download.content
             file = open("PyCharm-Community.exe", "wb")
             file.write(content)
             file.close()
+            xx = download.exec_()
 
-        if self.checkbox_16.isChecked():
+
+        elif self.checkBox_16.isChecked():
             url_download = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
             download = requests.get(url_download)
             content = download.content
@@ -504,15 +518,16 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_17.isChecked():
-            url_download = "https://ftp.acc.umu.se/mirror/eclipse.org/oomph/epp/2022-03/R/eclipse-inst-jre-win64.exe"
+
+        elif self.checkBox_17.isChecked():
+            url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open("Eclipse-Installer.exe", "wb")
+            file = open("SteamSetup.exe", "wb")
             file.write(content)
             file.close()
 
-        if self.checkbox_18.isChecked():
+        elif self.checkBox_18.isChecked():
             url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
             download = requests.get(url_download)
             content = download.content
@@ -520,18 +535,11 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_18.isChecked():
-            url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
-            download = requests.get(url_download)
-            content = download.content
-            file = open("DevCPP.exe", "wb")
-            file.write(content)
-            file.close()
 
-        if self.checkbox_19.isChecked():
+        elif self.checkBox_19.isChecked():
             pass
 
-        if self.checkbox_20.isChecked():
+        elif self.checkBox_20.isChecked():
             url_download = "https://drivers.amd.com/drivers/installer/21.50/beta/amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"
             download = requests.get(url_download)
             content = download.content
@@ -539,7 +547,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_21.isChecked():
+        elif self.checkBox_21.isChecked():
             url_download = "https://it.download.nvidia.com/GFE/GFEClient/3.25.1.27/GeForce_Experience_v3.25.1.27.exe"
             download = requests.get(url_download)
             content = download.content
@@ -547,7 +555,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_22.isChecked():
+        elif self.checkBox_22.isChecked():
             url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
             download = requests.get(url_download)
             content = download.content
@@ -555,7 +563,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_23.isChecked():
+        elif self.checkBox_23.isChecked():
             url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
             download = requests.get(url_download)
             content = download.content
@@ -563,7 +571,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkbox_24.isChecked():
+        elif self.checkBox_24.isChecked():
             url_download = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.2.4-Full-Installer-x64.exe"
             download = requests.get(url_download)
             content = download.content
@@ -571,7 +579,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkBox_25.isChecked():
+        elif self.checkBox_25.isChecked():
             url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
             download = requests.get(url_download)
             content = download.content
@@ -579,7 +587,7 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkBox_26.isChecked():
+        elif self.checkBox_26.isChecked():
             url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
             download = requests.get(url_download)
             content = download.content
@@ -587,13 +595,15 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
 
-        if self.checkBox_27.isChecked():
+        elif self.checkBox_27.isChecked():
             url_download = "https://download.scdn.co/SpotifySetup.exe"
             download = requests.get(url_download)
             content = download.content
             file = open("SpotifySetup.exe", "wb")
             file.write(content)
             file.close()
+
+
 
 
 if __name__ == "__main__":
