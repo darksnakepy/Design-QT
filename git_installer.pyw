@@ -1,5 +1,3 @@
-from turtle import color
-from typing import Text
 from PyQt5 import QtCore, QtGui, QtWidgets
 import qdarkstyle
 from PyQt5.QtGui import *
@@ -8,24 +6,24 @@ import webbrowser
 import requests
 import os.path
 
-
-
-
 class Ui_Installer(object):
-
     def setupUi(self, Installer):
         Installer.setObjectName("Installer")
-        Installer.setFixedSize(850, 529)
-        Installer.setWindowTitle("Multiple Installer")
+        Installer.setFixedSize(800, 516)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("documents/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Installer.setWindowIcon(icon)
+
+        # Design
         self.centralwidget = QtWidgets.QWidget(Installer)
         self.centralwidget.setObjectName("centralwidget")
         self.toolButton = QtWidgets.QToolButton(self.centralwidget)
-        self.toolButton.setGeometry(QtCore.QRect(680, 450, 121, 31))
+        self.toolButton.setGeometry(QtCore.QRect(650, 450, 121, 31))
         self.toolButton.setObjectName("toolButton")
         self.toolButton.clicked.connect(self.download)
         self.toolButton_2 = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_2.clicked.connect(self.author)
-        self.toolButton_2.setGeometry(QtCore.QRect(550, 450, 121, 31))
+        self.toolButton_2.setGeometry(QtCore.QRect(520, 450, 121, 31))
         self.toolButton_2.setObjectName("toolButton_2")
         self.toolButton_3 = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_3.setGeometry(QtCore.QRect(20, 450, 121, 31))
@@ -34,160 +32,159 @@ class Ui_Installer(object):
         self.label_37 = QtWidgets.QLabel(self.centralwidget)
         self.label_37.setGeometry(QtCore.QRect(300, 450, 221, 31))
         self.label_37.setText("Path not set!")
-        self.label_37.setStyleSheet("color: red; font-weight: 700;")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.clicked.connect(self.dark_mode)
         self.pushButton.setGeometry(QtCore.QRect(160, 450, 121, 30))
         self.pushButton.setObjectName("pushButton")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_2.setGeometry(QtCore.QRect(270, 30, 261, 391))
+        self.groupBox_2.setGeometry(QtCore.QRect(280, 30, 231, 391))
         self.groupBox_2.setObjectName("groupBox_2")
         self.label_10 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_10.setGeometry(QtCore.QRect(40, 30, 25, 25))
+        self.label_10.setGeometry(QtCore.QRect(20, 30, 25, 25))
         self.label_10.setText("")
         self.label_10.setPixmap(QtGui.QPixmap("documents/images/vis.png"))
         self.label_10.setObjectName("label_10")
         self.checkBox_12 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_12.setGeometry(QtCore.QRect(70, 180, 121, 41))
+        self.checkBox_12.setGeometry(QtCore.QRect(50, 180, 121, 41))
         self.checkBox_12.setObjectName("checkBox_12")
         self.checkBox_13 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_13.setGeometry(QtCore.QRect(70, 300, 121, 41))
+        self.checkBox_13.setGeometry(QtCore.QRect(50, 300, 121, 41))
         self.checkBox_13.setObjectName("checkBox_13")
         self.checkBox_10 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_10.setGeometry(QtCore.QRect(70, 340, 121, 41))
+        self.checkBox_10.setGeometry(QtCore.QRect(50, 340, 121, 41))
         self.checkBox_10.setObjectName("checkBox_10")
         self.checkBox_17 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_17.setGeometry(QtCore.QRect(70, 220, 121, 41))
+        self.checkBox_17.setGeometry(QtCore.QRect(50, 220, 121, 41))
         self.checkBox_17.setObjectName("checkBox_17")
         self.checkBox_11 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_11.setGeometry(QtCore.QRect(70, 20, 121, 41))
+        self.checkBox_11.setGeometry(QtCore.QRect(50, 20, 121, 41))
         self.checkBox_11.setObjectName("checkBox_11")
         self.checkBox_18 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_18.setGeometry(QtCore.QRect(70, 260, 121, 41))
+        self.checkBox_18.setGeometry(QtCore.QRect(50, 260, 121, 41))
         self.checkBox_18.setObjectName("checkBox_18")
         self.checkBox_16 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_16.setGeometry(QtCore.QRect(70, 60, 121, 41))
+        self.checkBox_16.setGeometry(QtCore.QRect(50, 60, 121, 41))
         self.checkBox_16.setObjectName("checkBox_16")
         self.checkBox_14 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_14.setGeometry(QtCore.QRect(70, 100, 121, 41))
+        self.checkBox_14.setGeometry(QtCore.QRect(50, 100, 121, 41))
         self.checkBox_14.setObjectName("checkBox_14")
         self.checkBox_15 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_15.setGeometry(QtCore.QRect(70, 140, 121, 41))
+        self.checkBox_15.setGeometry(QtCore.QRect(50, 140, 121, 41))
         self.checkBox_15.setObjectName("checkBox_15")
         self.label_11 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_11.setGeometry(QtCore.QRect(40, 70, 25, 25))
+        self.label_11.setGeometry(QtCore.QRect(20, 70, 25, 25))
         self.label_11.setText("")
         self.label_11.setPixmap(QtGui.QPixmap("documents/images/Untitled(3).png"))
         self.label_11.setObjectName("label_11")
         self.label_12 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_12.setGeometry(QtCore.QRect(40, 110, 25, 25))
+        self.label_12.setGeometry(QtCore.QRect(20, 110, 25, 25))
         self.label_12.setText("")
         self.label_12.setPixmap(QtGui.QPixmap("documents/images/st.png"))
         self.label_12.setObjectName("label_12")
         self.label_13 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_13.setGeometry(QtCore.QRect(40, 150, 25, 25))
+        self.label_13.setGeometry(QtCore.QRect(20, 150, 25, 25))
         self.label_13.setText("")
         self.label_13.setPixmap(QtGui.QPixmap("documents/images/Untitled(6).png"))
         self.label_13.setObjectName("label_13")
         self.label_14 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_14.setGeometry(QtCore.QRect(40, 190, 25, 25))
+        self.label_14.setGeometry(QtCore.QRect(20, 190, 25, 25))
         self.label_14.setText("")
         self.label_14.setPixmap(QtGui.QPixmap("documents/images/blender.png"))
         self.label_14.setObjectName("label_14")
         self.label_15 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_15.setGeometry(QtCore.QRect(40, 230, 25, 25))
+        self.label_15.setGeometry(QtCore.QRect(20, 230, 25, 25))
         self.label_15.setText("")
         self.label_15.setPixmap(QtGui.QPixmap("documents/images/eclipse.png"))
         self.label_15.setObjectName("label_15")
         self.label_16 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_16.setGeometry(QtCore.QRect(40, 270, 25, 25))
+        self.label_16.setGeometry(QtCore.QRect(20, 270, 25, 25))
         self.label_16.setText("")
         self.label_16.setPixmap(QtGui.QPixmap("documents/images/devpp.png"))
         self.label_16.setObjectName("label_16")
         self.label_17 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_17.setGeometry(QtCore.QRect(40, 310, 25, 25))
+        self.label_17.setGeometry(QtCore.QRect(20, 310, 25, 25))
         self.label_17.setText("")
         self.label_17.setPixmap(QtGui.QPixmap("documents/images/nodejs.png"))
         self.label_17.setObjectName("label_17")
         self.label_18 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_18.setGeometry(QtCore.QRect(40, 350, 25, 25))
+        self.label_18.setGeometry(QtCore.QRect(20, 350, 25, 25))
         self.label_18.setText("")
         self.label_18.setPixmap(QtGui.QPixmap("documents/images/qtdsgn.png"))
         self.label_18.setObjectName("label_18")
         self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_3.setGeometry(QtCore.QRect(560, 30, 241, 391))
+        self.groupBox_3.setGeometry(QtCore.QRect(540, 30, 231, 391))
         self.groupBox_3.setObjectName("groupBox_3")
         self.label_24 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_24.setGeometry(QtCore.QRect(50, 230, 25, 25))
+        self.label_24.setGeometry(QtCore.QRect(20, 230, 25, 25))
         self.label_24.setText("")
         self.label_24.setPixmap(QtGui.QPixmap("documents/images/virtualbox.png"))
         self.label_24.setObjectName("label_24")
         self.checkBox_24 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_24.setGeometry(QtCore.QRect(80, 140, 121, 41))
+        self.checkBox_24.setGeometry(QtCore.QRect(50, 140, 121, 41))
         self.checkBox_24.setObjectName("checkBox_24")
         self.checkBox_25 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_25.setGeometry(QtCore.QRect(80, 60, 121, 41))
+        self.checkBox_25.setGeometry(QtCore.QRect(50, 60, 121, 41))
         self.checkBox_25.setObjectName("checkBox_25")
         self.checkBox_26 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_26.setGeometry(QtCore.QRect(80, 220, 121, 41))
+        self.checkBox_26.setGeometry(QtCore.QRect(50, 220, 121, 41))
         self.checkBox_26.setObjectName("checkBox_26")
         self.checkBox_23 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_23.setGeometry(QtCore.QRect(80, 100, 121, 41))
+        self.checkBox_23.setGeometry(QtCore.QRect(50, 100, 121, 41))
         self.checkBox_23.setObjectName("checkBox_23")
         self.checkBox_27 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_27.setGeometry(QtCore.QRect(80, 260, 121, 41))
+        self.checkBox_27.setGeometry(QtCore.QRect(50, 260, 121, 41))
         self.checkBox_27.setObjectName("checkBox_27")
         self.checkBox_21 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_21.setGeometry(QtCore.QRect(80, 180, 121, 41))
+        self.checkBox_21.setGeometry(QtCore.QRect(50, 180, 121, 41))
         self.checkBox_21.setObjectName("checkBox_21")
         self.label_21 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_21.setGeometry(QtCore.QRect(50, 110, 25, 25))
+        self.label_21.setGeometry(QtCore.QRect(20, 110, 25, 25))
         self.label_21.setText("")
         self.label_21.setPixmap(QtGui.QPixmap("documents/images/7zip.png"))
         self.label_21.setObjectName("label_21")
         self.label_20 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_20.setGeometry(QtCore.QRect(50, 70, 25, 25))
+        self.label_20.setGeometry(QtCore.QRect(20, 70, 25, 25))
         self.label_20.setText("")
         self.label_20.setPixmap(QtGui.QPixmap("documents/images/winrar.png"))
         self.label_20.setObjectName("label_20")
         self.checkBox_20 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_20.setGeometry(QtCore.QRect(80, 20, 131, 41))
+        self.checkBox_20.setGeometry(QtCore.QRect(50, 20, 131, 41))
         self.checkBox_20.setObjectName("checkBox_20")
         self.label_25 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_25.setGeometry(QtCore.QRect(50, 270, 25, 25))
+        self.label_25.setGeometry(QtCore.QRect(20, 270, 25, 25))
         self.label_25.setText("")
         self.label_25.setPixmap(QtGui.QPixmap("documents/images/spotify.png"))
         self.label_25.setObjectName("label_25")
         self.checkBox_22 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_22.setGeometry(QtCore.QRect(80, 300, 121, 41))
+        self.checkBox_22.setGeometry(QtCore.QRect(50, 300, 121, 41))
         self.checkBox_22.setObjectName("checkBox_22")
         self.label_26 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_26.setGeometry(QtCore.QRect(50, 310, 25, 25))
+        self.label_26.setGeometry(QtCore.QRect(20, 310, 25, 25))
         self.label_26.setText("")
         self.label_26.setPixmap(QtGui.QPixmap("documents/images/vlc.png"))
         self.label_26.setObjectName("label_26")
         self.checkBox_19 = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_19.setGeometry(QtCore.QRect(80, 340, 141, 41))
+        self.checkBox_19.setGeometry(QtCore.QRect(50, 340, 141, 41))
         self.checkBox_19.setObjectName("checkBox_19")
         self.label_22 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_22.setGeometry(QtCore.QRect(50, 150, 25, 25))
+        self.label_22.setGeometry(QtCore.QRect(20, 150, 25, 25))
         self.label_22.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_22.setText("")
         self.label_22.setPixmap(QtGui.QPixmap("documents/images/obs_studio.png"))
         self.label_22.setObjectName("label_22")
         self.label_23 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_23.setGeometry(QtCore.QRect(50, 190, 25, 25))
+        self.label_23.setGeometry(QtCore.QRect(20, 190, 25, 25))
         self.label_23.setText("")
         self.label_23.setPixmap(QtGui.QPixmap("documents/images/geforce.png"))
         self.label_23.setObjectName("label_23")
         self.label_27 = QtWidgets.QLabel(self.groupBox_3)
-        self.label_27.setGeometry(QtCore.QRect(50, 350, 25, 25))
+        self.label_27.setGeometry(QtCore.QRect(20, 350, 25, 25))
         self.label_27.setText("")
         self.label_27.setPixmap(QtGui.QPixmap("documents/images/adobe_.png"))
         self.label_27.setObjectName("label_27")
         self.label_19 = QtWidgets.QLabel(self.groupBox_3)
         self.label_19.setEnabled(True)
-        self.label_19.setGeometry(QtCore.QRect(50, 30, 25, 25))
+        self.label_19.setGeometry(QtCore.QRect(20, 30, 25, 25))
         self.label_19.setText("")
         self.label_19.setPixmap(QtGui.QPixmap("documents/images/radeon_software_.png"))
         self.label_19.setAlignment(QtCore.Qt.AlignCenter)
@@ -323,7 +320,7 @@ class Ui_Installer(object):
 
     def retranslateUi(self, Installer):
         _translate = QtCore.QCoreApplication.translate
-        Installer.setWindowTitle(_translate("Installer", "MainWindow"))
+        Installer.setWindowTitle(_translate("Installer", "Multiple Installer"))
         self.toolButton.setText(_translate("Installer", "Install"))
         self.toolButton_2.setText(_translate("Installer", "Author"))
         self.toolButton_3.setText(_translate("Installer", "Choose Path"))
@@ -363,25 +360,21 @@ class Ui_Installer(object):
     def dark_mode(self):
         Installer.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
 
-
     def setPath(self):
-                global pat, pc
-                pat = str(QtWidgets.QFileDialog.getExistingDirectory())
-                if pat != ('', ''):
-                    print("path correct")
-                    self.label_37.setText(pat)
-                    self.label_37.setStyleSheet("color: green; font-weight: 700;")
-                else:
-                    print("wrong path")
+        global path
+        path = str(QtWidgets.QFileDialog.getExistingDirectory())
+        if path != ('', ''):
+            self.label_37.setText(path)
+            self.label_37.setStyleSheet("color: green; font-weight: 700;")
+        else:
+            self.label_37.setText("Select a focking path")
 
     def author(self):
-
-            webbrowser.open("https://github.com/darksnakepy/Design-QT")
-            msg = QMessageBox()
-            msg.setWindowTitle("Authors")
-            msg.setText("Developed by:\n- darksnakepy (Coder) \n- IlGabbo (Designer)")
-            x = msg.exec_()
-
+        webbrowser.open("https://github.com/darksnakepy/Design-QT")
+        msg = QMessageBox()
+        msg.setWindowTitle("Authors")
+        msg.setText("Programmato da:\n- Giovanni Sansonetti (Code) \n- Gabriele Mancini (Design)")
+        x = msg.exec_()
 
     def download(self):
 
@@ -391,11 +384,11 @@ class Ui_Installer(object):
             url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\SteamSetup.exe", "wb")
+            file = open(f"{path}\\SteamSetup.exe", "wb")
             file.write(content)
             file.close()
             name = "Steam"
-            if os.path.exists(f"{pat}\\SteamSetup.exe"):
+            if os.path.exists(f"{path}\\SteamSetup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -406,26 +399,26 @@ class Ui_Installer(object):
             url_download = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\DiscordSetup.exe", "wb")
+            file = open(f"{path}\\DiscordSetup.exe", "wb")
             file.write(content)
             file.close()
             name = "Discord"
-            if os.path.exists(f"{pat}\\DiscordSetup.exe"):
+            if os.path.exists(f"{path}\\DiscordSetup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-            
+
         if self.checkBox_3.isChecked():
             url_download = "https://download-hr.utorrent.com/track/stable/endpoint/utorrent/os/windows"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\uTorrent.exe", "wb")
+            file = open(f"{path}\\uTorrent.exe", "wb")
             file.write(content)
             file.close()
             name = "uTorrent"
-            if os.path.exists(f"{pat}\\uTorrent.exe"):
+            if os.path.exists(f"{path}\\uTorrent.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -436,27 +429,26 @@ class Ui_Installer(object):
             url_download = f"https://launcher.mojang.com/download/MinecraftInstaller.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\MinecraftLauncher.exe", "wb")
+            file = open(f"{path}\\MinecraftLauncher.exe", "wb")
             file.write(content)
             file.close()
             name = "Minecraft Launcher"
-            if os.path.exists(f"{pat}\\MinecraftLauncher.exe"):
+            if os.path.exists(f"{path}\\MinecraftLauncher.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
 
-
         if self.checkBox_5.isChecked():
             url_download = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\EpicGamesLauncherInstaller.msi", "wb")
+            file = open(f"{path}\\EpicGamesLauncherInstaller.msi", "wb")
             file.write(content)
             file.close()
             name = "Epic Games"
-            if os.path.exists(f"{pat}\\EpicGamesLauncherInstaller.msi"):
+            if os.path.exists(f"{path}\\EpicGamesLauncherInstaller.msi"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -467,28 +459,26 @@ class Ui_Installer(object):
             url_download = "https://www.battle.net/download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live&id=548869183.1649688146"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\BattleNet.exe", "wb")
+            file = open(f"{path}\\BattleNet.exe", "wb")
             file.write(content)
             file.close()
             name = "BattleNet"
-            if os.path.exists(f"{pat}\\BattleNet.exe.msi"):
+            if os.path.exists(f"{path}\\BattleNet.exe.msi"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
 
-
-
         if self.checkBox_7.isChecked():
             url_download = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\logitech-installer.exe", "wb")
+            file = open(f"{path}\\logitech-installer.exe", "wb")
             file.write(content)
             file.close()
             name = "Logitech GHub"
-            if os.path.exists(f"{pat}\\logitech-installer.exe"):
+            if os.path.exists(f"{path}\\logitech-installer.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -499,11 +489,11 @@ class Ui_Installer(object):
             url_download = "https://www.dm.origin.com/download"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\OriginSetup.exe", "wb")
+            file = open(f"{path}\\OriginSetup.exe", "wb")
             file.write(content)
             file.close()
             name = "Origin"
-            if os.path.exists(f"{pat}\\OriginSetup.exe"):
+            if os.path.exists(f"{path}\\OriginSetup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -514,11 +504,11 @@ class Ui_Installer(object):
             url_download = "https://tlauncher.org/installer"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\Tlauncher.exe", "wb")
+            file = open(f"{path}\\Tlauncher.exe", "wb")
             file.write(content)
             file.close()
             name = "TLauncher"
-            if os.path.exists(f"{pat}\\Tlauncher.exe"):
+            if os.path.exists(f"{path}\\Tlauncher.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -530,11 +520,11 @@ class Ui_Installer(object):
             url_download = "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-unified-windows-x86-4.3.0-1-online.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\QTDesigner-Setup.exe", "wb")
+            file = open(f"{path}\\QTDesigner-Setup.exe", "wb")
             file.write(content)
             file.close()
             name = "QT Designer"
-            if os.path.exists(f"{pat}\\QTDesigner-Setup.exe"):
+            if os.path.exists(f"{path}\\QTDesigner-Setup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -545,11 +535,11 @@ class Ui_Installer(object):
             url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\VisualStudio-Setup.exe", "wb")
+            file = open(f"{path}\\VisualStudio-Setup.exe", "wb")
             file.write(content)
             file.close()
             name = "Visual Studio"
-            if os.path.exists(f"{pat}\\VisualStudio-Setup.exe"):
+            if os.path.exists(f"{path}\\VisualStudio-Setup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -561,11 +551,11 @@ class Ui_Installer(object):
             url_download = "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.1/blender-3.1.2-windows-x64.msi"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\BlenderSetup.msi", "wb")
+            file = open(f"{path}\\BlenderSetup.msi", "wb")
             file.write(content)
             file.close()
             name = "Blender"
-            if os.path.exists(f"{pat}\\BlenderSetup.msi"):
+            if os.path.exists(f"{path}\\BlenderSetup.msi"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -576,11 +566,11 @@ class Ui_Installer(object):
             url_download = "https://nodejs.org/dist/v16.14.2/node-v16.14.2-x64.msi"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\Node-Setup.msi", "wb")
+            file = open(f"{path}\\Node-Setup.msi", "wb")
             file.write(content)
             file.close()
             name = "NodeJS"
-            if os.path.exists(f"{pat}\\Node-Setup.msi"):
+            if os.path.exists(f"{path}\\Node-Setup.msi"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -592,11 +582,11 @@ class Ui_Installer(object):
             url_download = "https://download.sublimetext.com/sublime_text_build_4126_x64_setup.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\SublimeText-Build.exe", "wb")
+            file = open(f"{path}\\SublimeText-Build.exe", "wb")
             file.write(content)
             file.close()
             name = "Sublime Text"
-            if os.path.exists(f"{pat}\\SublimeText-Build.exe"):
+            if os.path.exists(f"{path}\\SublimeText-Build.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -608,11 +598,11 @@ class Ui_Installer(object):
             url_download = "https://download.jetbrains.com/python/pycharm-community-2021.3.3.exe?_ga=2.185222057.1085385846.1649606918-1947123728.1649606918&_gl=1*ifgtn3*_ga*MTk0NzEyMzcyOC4xNjQ5NjA2OTE4*_ga_V0XZL7QHEB*MTY0OTY5MDcwOS4yLjEuMTY0OTY5MDcxMi4w"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\PyCharm-Community.exe", "wb")
+            file = open(f"{path}\\PyCharm-Community.exe", "wb")
             file.write(content)
             file.close()
             name = "PyCharm"
-            if os.path.exists(f"{pat}\\PyCharm-Community.exe"):
+            if os.path.exists(f"{path}\\PyCharm-Community.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -624,11 +614,11 @@ class Ui_Installer(object):
             url_download = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\VisualStudioCode-Setup.exe", "wb")
+            file = open(f"{path}\\VisualStudioCode-Setup.exe", "wb")
             file.write(content)
             file.close()
             name = "VS Code"
-            if os.path.exists(f"{pat}\\VisualStudioCode-Setup.exe"):
+            if os.path.exists(f"{path}\\VisualStudioCode-Setup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -640,11 +630,11 @@ class Ui_Installer(object):
             url_download = "https://ftp.acc.umu.se/mirror/eclipse.org/oomph/epp/2022-03/R/eclipse-inst-jre-win64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\Eclipse-Installer.exe", "wb")
+            file = open(f"{path}\\Eclipse-Installer.exe", "wb")
             file.write(content)
             file.close()
             name = "Eclipse"
-            if os.path.exists(f"{pat}\\Eclipse-Installer.exe"):
+            if os.path.exists(f"{path}\\Eclipse-Installer.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -655,11 +645,11 @@ class Ui_Installer(object):
             url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\DevCPP.exe", "wb")
+            file = open(f"{path}\\DevCPP.exe", "wb")
             file.write(content)
             file.close()
             name = "dev.cpp"
-            if os.path.exists(f"{pat}\\DevCPP.exe"):
+            if os.path.exists(f"{path}\\DevCPP.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -674,11 +664,11 @@ class Ui_Installer(object):
             url_download = "https://drivers.amd.com/drivers/installer/21.50/beta/amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe", "wb")
+            file = open(f"{path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe", "wb")
             file.write(content)
             file.close()
             name = "Amd Radeon Software"
-            if os.path.exists(f"{pat}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"):
+            if os.path.exists(f"{path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -689,11 +679,11 @@ class Ui_Installer(object):
             url_download = "https://it.download.nvidia.com/GFE/GFEClient/3.25.1.27/GeForce_Experience_v3.25.1.27.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\GeForce_Experience.exe", "wb")
+            file = open(f"{path}\\GeForce_Experience.exe", "wb")
             file.write(content)
             file.close()
             name = "Geforce Experience"
-            if os.path.exists(f"{pat}\\GeForce_Experience.exe"):
+            if os.path.exists(f"{path}\\GeForce_Experience.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -704,11 +694,11 @@ class Ui_Installer(object):
             url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\vlcsetup.exe", "wb")
+            file = open(f"{path}\\vlcsetup.exe", "wb")
             file.write(content)
             file.close()
             name = "Vlc"
-            if os.path.exists(f"{pat}\\vlcsetup.exe"):
+            if os.path.exists(f"{path}\\vlcsetup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -720,11 +710,11 @@ class Ui_Installer(object):
             url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\7-zip.exe", "wb")
+            file = open(f"{path}\\7-zip.exe", "wb")
             file.write(content)
             file.close()
             name = "7-zip"
-            if os.path.exists(f"{pat}\\7-zip.exe"):
+            if os.path.exists(f"{path}\\7-zip.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -735,11 +725,11 @@ class Ui_Installer(object):
             url_download = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.2.4-Full-Installer-x64.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\OBS-Full-Installer.exe", "wb")
+            file = open(f"{path}\\OBS-Full-Installer.exe", "wb")
             file.write(content)
             file.close()
             name = "OBS"
-            if os.path.exists(f"{pat}\\OBS-Full-Installer.exe"):
+            if os.path.exists(f"{path}\\OBS-Full-Installer.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -750,11 +740,11 @@ class Ui_Installer(object):
             url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\WinRar-Setup.exe", "wb")
+            file = open(f"{path}\\WinRar-Setup.exe", "wb")
             file.write(content)
             file.close()
             name = "WinRar"
-            if os.path.exists(f"{pat}\\WinRar-Setup.exe"):
+            if os.path.exists(f"{path}\\WinRar-Setup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -765,11 +755,11 @@ class Ui_Installer(object):
             url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
             download = requests.get(url_download)
             content = download.content
-            file = open(f"{pat}\\Virtual-Box-Windows.exe", "wb")
+            file = open(f"{path}\\Virtual-Box-Windows.exe", "wb")
             file.write(content)
             file.close()
             name = "Virtual Box"
-            if os.path.exists(f"{pat}\\Virtual-Box-Windows.exe"):
+            if os.path.exists(f"{path}\\Virtual-Box-Windows.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
@@ -784,18 +774,17 @@ class Ui_Installer(object):
             file.write(content)
             file.close()
             name = "Spotify"
-            if os.path.exists(f"{pat}\\SpotifySetup.exe"):
+            if os.path.exists(f"{path}\\SpotifySetup.exe"):
                 msg = QMessageBox()
                 msg.setWindowTitle("Done")
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully downloaded!")
                 x = msg.exec_()
-            
 
-    
-    
+
+
+
 if __name__ == "__main__":
-
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Installer = QtWidgets.QMainWindow()
