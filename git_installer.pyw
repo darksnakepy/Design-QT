@@ -6,6 +6,7 @@ import webbrowser
 import requests
 import os.path
 import os
+import time
 
 class Ui_Installer(object):
     def setupUi(self, Installer):
@@ -371,11 +372,12 @@ class Ui_Installer(object):
             self.label_37.setText("Select a focking path")
 
     def author(self):
-        webbrowser.open("https://github.com/darksnakepy/Design-QT")
         msg = QMessageBox()
         msg.setWindowTitle("Authors")
         msg.setText("Programmato da:\n- Giovanni Sansonetti (Code) \n- Gabriele Mancini (Design)")
         x = msg.exec_()
+        time.sleep(0.5)
+        webbrowser.open("https://github.com/darksnakepy/Design-QT")    
 
     def download(self):
 
@@ -428,7 +430,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\uTorrent.exe")
+                os.system(f"start {path}\\uTorrent.exe")
 
         if self.checkBox_4.isChecked():
             url_download = f"https://launcher.mojang.com/download/MinecraftInstaller.exe"
@@ -590,7 +592,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\Node-Setup.msi")
+                os.system(f"start {path}\\Node-Setup.msi")
 
 
         elif self.checkBox_14.isChecked():
@@ -607,7 +609,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\SublimeText-Build.exe")
+                os.system(f"start {path}\\SublimeText-Build.exe")
 
 
         elif self.checkBox_15.isChecked():
@@ -624,7 +626,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\PyCharm-Community.exe")
+                os.system(f"start {path}\\PyCharm-Community.exe")
 
 
         elif self.checkBox_16.isChecked():
@@ -641,7 +643,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\VisualStudioCode-Setup.exe")
+                os.system(f"start {path}\\VisualStudioCode-Setup.exe")
 
 
         elif self.checkBox_17.isChecked():
@@ -658,7 +660,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\Eclipse-Installer.exe")
+                os.system(f"start {path}\\Eclipse-Installer.exe")
 
         elif self.checkBox_18.isChecked():
             url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
@@ -674,7 +676,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\DevCPP.exe")
+                os.system(f"start {path}\\DevCPP.exe")
 
 
         elif self.checkBox_19.isChecked():
@@ -710,7 +712,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully installed!")
                 x = msg.exec_()
-                os.system(f"start {path}\GeForce_Experience.exe")
+                os.system(f"start {path}\\GeForce_Experience.exe")
 
         elif self.checkBox_22.isChecked():
             url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
@@ -759,7 +761,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully downloaded!")
                 x = msg.exec_()
-                os.system(f"start {path}\OBS-Full-Installer.exe")
+                os.system(f"start {path}\\OBS-Full-Installer.exe")
 
         elif self.checkBox_25.isChecked():
             url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
@@ -775,7 +777,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully downloaded!")
                 x = msg.exec_()
-                os.system(f"start {path}\WinRar-Setup.exe")
+                os.system(f"start {path}\\WinRar-Setup.exe")
 
         elif self.checkBox_26.isChecked():
             url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
@@ -791,7 +793,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully downloaded!")
                 x = msg.exec_()
-                os.system(f"start {path}\Virtual-Box-Windows.exe")
+                os.system(f"start {path}\\Virtual-Box-Windows.exe")
 
         elif self.checkBox_27.isChecked():
             url_download = "https://download.scdn.co/SpotifySetup.exe"
@@ -807,7 +809,7 @@ class Ui_Installer(object):
                 msg.setStyleSheet("color: green; font-weight: 700;")
                 msg.setText(f"{name} installer successfully downloaded!")
                 x = msg.exec_()
-                os.system(f"start {path}\SpotifySetup.exe")
+                os.system(f"start {path}\\SpotifySetup.exe")
 
 
 
