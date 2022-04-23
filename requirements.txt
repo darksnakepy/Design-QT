@@ -1,0 +1,5 @@
+PyQt5
+qdarkstyle
+requests
+playsound
+auto-py-to-exe
