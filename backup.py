@@ -168,6 +168,7 @@ class Ui_Installer(object):
         self.checkBox_19 = QtWidgets.QCheckBox(self.groupBox_3)
         self.checkBox_19.setGeometry(QtCore.QRect(50, 340, 141, 41))
         self.checkBox_19.setObjectName("checkBox_19")
+        self.checkBox_19.setEnabled(False)
         self.label_22 = QtWidgets.QLabel(self.groupBox_3)
         self.label_22.setGeometry(QtCore.QRect(20, 150, 25, 25))
         self.label_22.setFrameShadow(QtWidgets.QFrame.Sunken)
