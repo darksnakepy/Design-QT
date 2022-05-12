@@ -9,6 +9,7 @@ import os.path
 import os
 from PySide2.QtCore import QThread, Signal
 from PySide2.QtWidgets import QMainWindow, QApplication, QPushButton
+import time
 
 class CustomThread(QThread):
     ended = Signal(bool)
@@ -18,13 +19,14 @@ class CustomThread(QThread):
         super().__init__()
  
     def run(self):
+        if self.checkBox.isChecked():
             url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
             download = requests.get(url_download)
             content = download.content
             file = open("SteamSetup.exe", "wb")
             file.write(content)
             file.close()
-
+            
         #
 
 
