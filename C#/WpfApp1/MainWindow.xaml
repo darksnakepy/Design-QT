@@ -1,0 +1,207 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Git Installer" Height="516" Width="800"
+        ResizeMode="CanMinimize"
+        Style="{DynamicResource CustomWindowStyle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Margin="40,0,40,83" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label>Games</Label>
+                <CheckBox Margin="10" Name="SteamCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/steam.png" Height="13" Width="13"></Image>
+                        Steam
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="DiscordCheck">
+                    <TextBlock>
+                        <Image  Source="/Assets/Images/discord.png" Height="13" Width="13"></Image>
+                        Discord
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="uTorrentCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/torrent.png" Height="13" Width="13"></Image>
+                        uTorrent
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="MinecraftPRCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/mc.png" Height="13" Width="13"></Image>
+                        Minecraft Premium
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="EpicGamesCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/epic.png" Height="13" Width="13"></Image>
+                        Epic Games
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="BattleNetCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/battle.png" Height="13" Width="13"></Image>
+                        Battle.Net
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="LogitechCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/lg.png" Height="13" Width="13"></Image>
+                        Logitech G HUB
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="OriginCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/origin.png" Height="13" Width="13"></Image>
+                        Origin
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="MinecraftCRCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/mc.png" Height="13" Width="13"></Image>
+                        Minecraft (Cracked)
+                    </TextBlock>
+                </CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Label>Developing</Label>
+                <CheckBox Margin="10" Name="VS2022Check">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/visualstudio.png" Height="13" Width="13"></Image>
+                        Visual Studio 2022
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="VSCCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/visualcode.png" Height="13" Width="13"></Image>
+                        Visual Studio Code
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="SublimeTextCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/sublime.png" Height="13" Width="13"></Image>
+                        Sublime Text
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="PyCharmCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/pycharm.png" Height="13" Width="13"></Image>
+                        PyCharm
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="BlenderCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/blender.png" Height="13" Width="13"></Image>
+                        Blender
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="EclipseCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/eclipse.png" Height="13" Width="13"></Image>
+                        Eclipse
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="DevCCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/devpp.png" Height="13" Width="13"></Image>
+                        Dev CPP
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="NodeJSCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/nodejs.png" Height="13" Width="13"></Image>
+                        NodeJS
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="QtDesigner">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/qtdsgn.png" Height="13" Width="13"></Image>
+                        QT Designer
+                    </TextBlock>
+                </CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <Label>Utilities</Label>
+                <CheckBox Margin="10" Name="AMDCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/radeon_software_.png" Height="13" Width="13"></Image>
+                        AMD Radeon Software
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="WinRarCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/winrar.png" Height="13" Width="13"></Image>
+                        WinRar
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="SevZipCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/7zip.png" Height="13" Width="13"></Image>
+                        7-Zip
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="OBSCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/obs_studio.png" Height="13" Width="13"></Image>
+                        OBS
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="GeForceCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/geforce.png" Height="13" Width="13"></Image>
+                        GeForce
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="VirtualBoxCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/virtualbox.png" Height="13" Width="13"></Image>
+                        VirtualBox
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="SpotifyCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/spotify.png" Height="13" Width="13"></Image>
+                        Spotify
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="VLCCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/vlc.png" Height="13" Width="13"></Image>
+                        VLC
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Margin="10" Name="AdobeInstallerCheck">
+                    <TextBlock>
+                        <Image Source="/Assets/Images/dropbox_icon.png" Height="13" Width="13"></Image>
+                        DropBox
+                    </TextBlock>
+                </CheckBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="80" Height="30" Name="PathChoose" Click="PathChoose_Click">Choose Path</Button>
+            <TextBlock Grid.Column="1" Name="PathText" HorizontalAlignment="Center" VerticalAlignment="Center">Path not set!</TextBlock>
+            <Button Grid.Column="2" Width="80" Height="30" Name="AuthorName" Click="AuthorName_Click">Author</Button>
+            <Button Grid.Column="3" Width="80" Height="30" Name="InstallButton" Click="InstallButton_Click">Install</Button>
+        </Grid>
+    </Grid>
+</Window>
