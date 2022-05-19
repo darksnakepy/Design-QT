@@ -3,7 +3,7 @@ import qdarkstyle
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 import webbrowser, requests, time, threading
-from os import os.path
+from os import path
 
 class Ui_Installer(object):
     def setupUi(self, Installer):
@@ -20,6 +20,7 @@ class Ui_Installer(object):
         self.toolButton = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton.setGeometry(QtCore.QRect(650, 450, 121, 31))
         self.toolButton.setObjectName("toolButton")
+        self.toolButton.setEnabled(False)
         self.toolButton.clicked.connect(self.download)
         self.toolButton_2 = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_2.clicked.connect(self.author)
@@ -30,7 +31,7 @@ class Ui_Installer(object):
         self.toolButton_3.clicked.connect(self.setPath)
         self.toolButton_3.setObjectName("toolButton_3")
         self.label_37 = QtWidgets.QLabel(self.centralwidget)
-        self.label_37.setGeometry(QtCore.QRect(150, 450, 141, 31))
+        self.label_37.setGeometry(QtCore.QRect(150, 450, 241, 31))
         self.label_37.setText("Path not set!")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(280, 30, 231, 391))
@@ -356,12 +357,12 @@ class Ui_Installer(object):
 
     def setPath(self):
         global path
-        path = str(QtWidgets.QFileDialog.getExistingDirectory())
+        path = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         if path != ('', ''):
             self.label_37.setText(path)
             self.label_37.setStyleSheet("color: green; font-weight: 700;")
-        else:
-            self.label_37.setText("Select a focking path")
+        elif path == "":
+            self.label_37.setText("Wrong path")
 
     def author(self):
         msg = QMessageBox()
@@ -598,8 +599,13 @@ class Ui_Installer(object):
             x = msg.exec()
             
     def download(self):
-        t1 = threading.Thread(target=self.Worker)
-        t1.start()
+        if path != (' ', ' '):
+            self.toolButton.setEnabled(True)
+            t1 = threading.Thread(target=self.Worker)
+            t1.start()
+        else:
+            pass
+            
 
 
 if __name__ == "__main__":
