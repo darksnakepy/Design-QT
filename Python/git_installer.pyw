@@ -2,11 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import qdarkstyle
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
-import webbrowser
-import requests
-import os.path
-import os
-import time
+import webbrowser, requests, time, threading
+from os import path
 
 class Ui_Installer(object):
     def setupUi(self, Installer):
@@ -15,6 +12,7 @@ class Ui_Installer(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("documents/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Installer.setWindowIcon(icon)
+        Installer.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
 
         # Design
         self.centralwidget = QtWidgets.QWidget(Installer)
@@ -22,6 +20,7 @@ class Ui_Installer(object):
         self.toolButton = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton.setGeometry(QtCore.QRect(650, 450, 121, 31))
         self.toolButton.setObjectName("toolButton")
+        self.toolButton.setEnabled(False)
         self.toolButton.clicked.connect(self.download)
         self.toolButton_2 = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_2.clicked.connect(self.author)
@@ -32,12 +31,8 @@ class Ui_Installer(object):
         self.toolButton_3.clicked.connect(self.setPath)
         self.toolButton_3.setObjectName("toolButton_3")
         self.label_37 = QtWidgets.QLabel(self.centralwidget)
-        self.label_37.setGeometry(QtCore.QRect(300, 450, 221, 31))
+        self.label_37.setGeometry(QtCore.QRect(150, 450, 241, 31))
         self.label_37.setText("Path not set!")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.clicked.connect(self.dark_mode)
-        self.pushButton.setGeometry(QtCore.QRect(160, 450, 121, 30))
-        self.pushButton.setObjectName("pushButton")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(280, 30, 231, 391))
         self.groupBox_2.setObjectName("groupBox_2")
@@ -168,6 +163,7 @@ class Ui_Installer(object):
         self.checkBox_19 = QtWidgets.QCheckBox(self.groupBox_3)
         self.checkBox_19.setGeometry(QtCore.QRect(50, 340, 141, 41))
         self.checkBox_19.setObjectName("checkBox_19")
+        self.checkBox_19.setEnabled(False)
         self.label_22 = QtWidgets.QLabel(self.groupBox_3)
         self.label_22.setGeometry(QtCore.QRect(20, 150, 25, 25))
         self.label_22.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -326,7 +322,6 @@ class Ui_Installer(object):
         self.toolButton.setText(_translate("Installer", "Install"))
         self.toolButton_2.setText(_translate("Installer", "Author"))
         self.toolButton_3.setText(_translate("Installer", "Choose Path"))
-        self.pushButton.setText(_translate("Installer", "Dark Mode"))
         self.groupBox_2.setTitle(_translate("Installer", "Developing"))
         self.checkBox_12.setText(_translate("Installer", "Blender"))
         self.checkBox_13.setText(_translate("Installer", "NodeJS"))
@@ -359,17 +354,19 @@ class Ui_Installer(object):
         self.checkBox.setText(_translate("Installer", "Steam"))
         self.checkBox_9.setText(_translate("Installer", "Minecraft (cracked)"))
 
-    def dark_mode(self):
-        Installer.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
 
     def setPath(self):
         global path
+        
         path = str(QtWidgets.QFileDialog.getExistingDirectory())
-        if path != ('', ''):
+        if path != "":
             self.label_37.setText(path)
             self.label_37.setStyleSheet("color: green; font-weight: 700;")
-        else:
-            self.label_37.setText("Select a focking path")
+            self.toolButton.setEnabled(True)
+        elif path == "":
+            self.label_37.setText("Wrong path")
+            self.label_37.setStyleSheet("color: red;")
+
 
     def author(self):
         msg = QMessageBox()
@@ -379,439 +376,239 @@ class Ui_Installer(object):
         time.sleep(0.5)
         webbrowser.open("https://github.com/darksnakepy/Design-QT")    
 
-    def download(self):
-
+    def Worker(self):
         global x
+        try:
+            if self.checkBox.isChecked():
+                url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\SteamSetup.exe", "wb")
+                file.write(content)
+                file.close()
 
-        if self.checkBox.isChecked():
-            url_download = "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\SteamSetup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Steam"
-            if os.path.exists(f"{path}\\SteamSetup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                print(file)
-                os.system(f"start {path}\SteamSetup.exe")
+            if self.checkBox_2.isChecked():
+                url_download = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\DiscordSetup.exe", "wb")
+                file.write(content)
+                file.close()
+            
+            if self.checkBox_3.isChecked():
+                url_download = "https://download-hr.utorrent.com/track/stable/endpoint/utorrent/os/windows"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\uTorrent.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_4.isChecked():
+                url_download = f"https://launcher.mojang.com/download/MinecraftInstaller.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\MinecraftLauncher.exe", "wb")
+                file.write(content)
+                file.close()
 
-        if self.checkBox_2.isChecked():
-            url_download = "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\DiscordSetup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Discord"
-            if os.path.exists(f"{path}\\DiscordSetup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\DiscordSetup.exe")
+            if self.checkBox_5.isChecked():
+                url_download = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\EpicGamesLauncherInstaller.msi", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_6.isChecked():
+                url_download = "https://www.battle.net/download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live&id=548869183.1649688146"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\BattleNet.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_7.isChecked():
+                url_download = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\logitech-installer.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_8.isChecked():
+                url_download = "https://www.dm.origin.com/download"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\OriginSetup.exe", "wb")
+                file.write(content)
+                file.close()
 
-        if self.checkBox_3.isChecked():
-            url_download = "https://download-hr.utorrent.com/track/stable/endpoint/utorrent/os/windows"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\uTorrent.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "uTorrent"
-            if os.path.exists(f"{path}\\uTorrent.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\uTorrent.exe")
-
-        if self.checkBox_4.isChecked():
-            url_download = f"https://launcher.mojang.com/download/MinecraftInstaller.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\MinecraftLauncher.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Minecraft Launcher"
-            if os.path.exists(f"{path}\\MinecraftLauncher.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\MinecraftLauncher.exe")
-
-        if self.checkBox_5.isChecked():
-            url_download = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\EpicGamesLauncherInstaller.msi", "wb")
-            file.write(content)
-            file.close()
-            name = "Epic Games"
-            if os.path.exists(f"{path}\\EpicGamesLauncherInstaller.msi"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\EpicGamesLauncherInstaller.msi")
-
-        if self.checkBox_6.isChecked():
-            url_download = "https://www.battle.net/download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live&id=548869183.1649688146"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\BattleNet.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "BattleNet"
-            if os.path.exists(f"{path}\\BattleNet.exe.msi"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\EpicGamesLauncherInstaller.msi")
-
-        if self.checkBox_7.isChecked():
-            url_download = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\logitech-installer.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Logitech GHub"
-            if os.path.exists(f"{path}\\logitech-installer.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\EpicGamesLauncherInstaller.msi")
-
-        if self.checkBox_8.isChecked():
-            url_download = "https://www.dm.origin.com/download"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\OriginSetup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Origin"
-            if os.path.exists(f"{path}\\OriginSetup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\OriginSetup.exe")
-
-        if self.checkBox_9.isChecked():
-            url_download = "https://tlauncher.org/installer"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\Tlauncher.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "TLauncher"
-            if os.path.exists(f"{path}\\Tlauncher.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\Tlauncher.exe")
+            if self.checkBox_9.isChecked():
+                url_download = "https://tlauncher.org/installer"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\Tlauncher.exe", "wb")
+                file.write(content)
+                file.close()
 
 
-        elif self.checkBox_10.isChecked():
-            url_download = "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-unified-windows-x86-4.3.0-1-online.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\QTDesigner-Setup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "QT Designer"
-            if os.path.exists(f"{path}\\QTDesigner-Setup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\QTDesigner-Setup.exe")
+            if self.checkBox_10.isChecked():
+                url_download = "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-unified-windows-x86-4.3.0-1-online.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\QTDesigner-Setup.exe", "wb")
+                file.write(content)
+                file.close()
 
-        elif self.checkBox_11.isChecked():
-            url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\VisualStudio-Setup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Visual Studio"
-            if os.path.exists(f"{path}\\VisualStudio-Setup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\VisualStudio-Setup.exe")
+            if self.checkBox_11.isChecked():
+                url_download = "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\VisualStudio-Setup.exe", "wb")
+                file.write(content)
+                file.close()
 
 
-        elif self.checkBox_12.isChecked():
-            url_download = "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.1/blender-3.1.2-windows-x64.msi"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\BlenderSetup.msi", "wb")
-            file.write(content)
-            file.close()
-            name = "Blender"
-            if os.path.exists(f"{path}\\BlenderSetup.msi"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\BlenderSetup.msi")
+            if self.checkBox_12.isChecked():
+                url_download = "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.1/blender-3.1.2-windows-x64.msi"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\BlenderSetup.msi", "wb")
+                file.write(content)
+                file.close()
 
-        elif self.checkBox_13.isChecked():
-            url_download = "https://nodejs.org/dist/v16.14.2/node-v16.14.2-x64.msi"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\Node-Setup.msi", "wb")
-            file.write(content)
-            file.close()
-            name = "NodeJS"
-            if os.path.exists(f"{path}\\Node-Setup.msi"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\Node-Setup.msi")
+            if self.checkBox_13.isChecked():
+                url_download = "https://nodejs.org/dist/v16.14.2/node-v16.14.2-x64.msi"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\Node-Setup.msi", "wb")
+                file.write(content)
+                file.close()
+
+            if self.checkBox_14.isChecked():
+                url_download = "https://download.sublimetext.com/sublime_text_build_4126_x64_setup.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\SublimeText-Build.exe", "wb")
+                file.write(content)
+                file.close()
 
 
-        elif self.checkBox_14.isChecked():
-            url_download = "https://download.sublimetext.com/sublime_text_build_4126_x64_setup.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\SublimeText-Build.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Sublime Text"
-            if os.path.exists(f"{path}\\SublimeText-Build.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\SublimeText-Build.exe")
+            if self.checkBox_15.isChecked():
+                url_download = "https://download.jetbrains.com/python/pycharm-community-2021.3.3.exe?_ga=2.185222057.1085385846.1649606918-1947123728.1649606918&_gl=1*ifgtn3*_ga*MTk0NzEyMzcyOC4xNjQ5NjA2OTE4*_ga_V0XZL7QHEB*MTY0OTY5MDcwOS4yLjEuMTY0OTY5MDcxMi4w"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\PyCharm-Community.exe", "wb")
+                file.write(content)
+                file.close()
 
 
-        elif self.checkBox_15.isChecked():
-            url_download = "https://download.jetbrains.com/python/pycharm-community-2021.3.3.exe?_ga=2.185222057.1085385846.1649606918-1947123728.1649606918&_gl=1*ifgtn3*_ga*MTk0NzEyMzcyOC4xNjQ5NjA2OTE4*_ga_V0XZL7QHEB*MTY0OTY5MDcwOS4yLjEuMTY0OTY5MDcxMi4w"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\PyCharm-Community.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "PyCharm"
-            if os.path.exists(f"{path}\\PyCharm-Community.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\PyCharm-Community.exe")
+            if self.checkBox_16.isChecked():
+                url_download = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\VisualStudioCode-Setup.exe", "wb")
+                file.write(content)
+                file.close()
 
 
-        elif self.checkBox_16.isChecked():
-            url_download = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\VisualStudioCode-Setup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "VS Code"
-            if os.path.exists(f"{path}\\VisualStudioCode-Setup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\VisualStudioCode-Setup.exe")
+            if self.checkBox_17.isChecked():
+                url_download = "https://ftp.acc.umu.se/mirror/eclipse.org/oomph/epp/2022-03/R/eclipse-inst-jre-win64.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\Eclipse-Installer.exe", "wb")
+                file.write(content)
+                file.close()
 
+            if self.checkBox_18.isChecked():
+                url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\DevCPP.exe", "wb")
+                file.write(content)
+                file.close()
 
-        elif self.checkBox_17.isChecked():
-            url_download = "https://ftp.acc.umu.se/mirror/eclipse.org/oomph/epp/2022-03/R/eclipse-inst-jre-win64.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\Eclipse-Installer.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Eclipse"
-            if os.path.exists(f"{path}\\Eclipse-Installer.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\Eclipse-Installer.exe")
+            if self.checkBox_19.isChecked():
+                pass
 
-        elif self.checkBox_18.isChecked():
-            url_download = "https://sourceforge.net/projects/orwelldevcpp/files/latest/download"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\DevCPP.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "dev.cpp"
-            if os.path.exists(f"{path}\\DevCPP.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\DevCPP.exe")
+            if self.checkBox_20.isChecked():
+                url_download = "https://drivers.amd.com/drivers/installer/21.50/beta/amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe", "wb")
+                file.write(content)
+                file.close()
+                
 
+            if self.checkBox_21.isChecked():
+                url_download = "https://it.download.nvidia.com/GFE/GFEClient/3.25.1.27/GeForce_Experience_v3.25.1.27.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\GeForce_Experience.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_22.isChecked():
+                url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\vlcsetup.exe", "wb")
+                file.write(content)
+                file.close()
+                
 
-        elif self.checkBox_19.isChecked():
-            pass
-
-        elif self.checkBox_20.isChecked():
-            url_download = "https://drivers.amd.com/drivers/installer/21.50/beta/amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Amd Radeon Software"
-            if os.path.exists(f"{path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\amd-software-adrenalin-edition-22.4.1-minimalsetup-220404_web.exe")
-
-        elif self.checkBox_21.isChecked():
-            url_download = "https://it.download.nvidia.com/GFE/GFEClient/3.25.1.27/GeForce_Experience_v3.25.1.27.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\GeForce_Experience.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Geforce Experience"
-            if os.path.exists(f"{path}\\GeForce_Experience.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\GeForce_Experience.exe")
-
-        elif self.checkBox_22.isChecked():
-            url_download = "https://get.videolan.org/vlc/3.0.16/win64/vlc-3.0.16-win64.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\vlcsetup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Vlc"
-            if os.path.exists(f"{path}\\vlcsetup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully installed!")
-                x = msg.exec_()
-                os.system(f"start {path}\\vlcsetup.exe")
-
-
-        elif self.checkBox_23.isChecked():
-            url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\7-zip.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "7-zip"
-            if os.path.exists(f"{path}\\7-zip.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully downloaded!")
-                x = msg.exec_()
-                os.system(f"start {path}\\7-zip.exe")
-
-        elif self.checkBox_24.isChecked():
-            url_download = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.2.4-Full-Installer-x64.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\OBS-Full-Installer.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "OBS"
-            if os.path.exists(f"{path}\\OBS-Full-Installer.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully downloaded!")
-                x = msg.exec_()
-                os.system(f"start {path}\\OBS-Full-Installer.exe")
-
-        elif self.checkBox_25.isChecked():
-            url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\WinRar-Setup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "WinRar"
-            if os.path.exists(f"{path}\\WinRar-Setup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully downloaded!")
-                x = msg.exec_()
-                os.system(f"start {path}\\WinRar-Setup.exe")
-
-        elif self.checkBox_26.isChecked():
-            url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\Virtual-Box-Windows.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Virtual Box"
-            if os.path.exists(f"{path}\\Virtual-Box-Windows.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully downloaded!")
-                x = msg.exec_()
-                os.system(f"start {path}\\Virtual-Box-Windows.exe")
-
-        elif self.checkBox_27.isChecked():
-            url_download = "https://download.scdn.co/SpotifySetup.exe"
-            download = requests.get(url_download)
-            content = download.content
-            file = open(f"{path}\\SpotifySetup.exe", "wb")
-            file.write(content)
-            file.close()
-            name = "Spotify"
-            if os.path.exists(f"{path}\\SpotifySetup.exe"):
-                msg = QMessageBox()
-                msg.setWindowTitle("Done")
-                msg.setStyleSheet("color: green; font-weight: 700;")
-                msg.setText(f"{name} installer successfully downloaded!")
-                x = msg.exec_()
-                os.system(f"start {path}\\SpotifySetup.exe")
-
-
+            if self.checkBox_23.isChecked():
+                url_download = "https://www.7-zip.org/a/7z2107-x64.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\7-zip.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_24.isChecked():
+                url_download = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.2.4-Full-Installer-x64.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\OBS-Full-Installer.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_25.isChecked():
+                url_download = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-611it.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\WinRar-Setup.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_26.isChecked():
+                url_download = "https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Win.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\Virtual-Box-Windows.exe", "wb")
+                file.write(content)
+                file.close()
+                
+            if self.checkBox_27.isChecked():
+                url_download = "https://download.scdn.co/SpotifySetup.exe"
+                download = requests.get(url_download)
+                content = download.content
+                file = open(f"{path}\\SpotifySetup.exe", "wb")
+                file.write(content)
+                file.close()
+        except:
+            msg = QMessageBox()
+            msg.setWindowTitle("Warning")
+            msg.setText("Select a path first!")
+            x = msg.exec()
+            
+    def download(self):
+        if path != "":
+            t1 = threading.Thread(target=self.Worker)
+            t1.start()
+        else:
+            self.label_37.setStyleSheet("color: red;")
+            
 
 
 if __name__ == "__main__":
