@@ -2,12 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import qdarkstyle
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
-import webbrowser
-import requests
-import os.path
-import os
-import time
-import threading
+import webbrowser, requests, time, threading
+from os import os.path
 
 class Ui_Installer(object):
     def setupUi(self, Installer):
