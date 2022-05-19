@@ -1,4 +1,3 @@
-from msilib.schema import CheckBox
 from PyQt5 import QtCore, QtGui, QtWidgets
 import qdarkstyle
 from PyQt5.QtGui import *
