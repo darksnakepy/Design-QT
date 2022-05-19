@@ -357,7 +357,7 @@ class Ui_Installer(object):
 
     def setPath(self):
         global path
-        path = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
+        path = str(QtWidgets.QFileDialog.getExistingDirectory())
         if path != ('', ''):
             self.label_37.setText(path)
             self.label_37.setStyleSheet("color: green; font-weight: 700;")
